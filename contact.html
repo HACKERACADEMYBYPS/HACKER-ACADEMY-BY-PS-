@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact | HACKER ACADEMY</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet"/>
+
+  <style>
+    body { margin:0; font-family:'Orbitron',sans-serif; background:#0a0a0a; color:#00ffea; }
+    .container { width:90%; max-width:1100px; margin:auto; padding:40px 0; }
+    header { background:black; padding:20px 0; text-align:center; border-bottom:2px solid cyan; box-shadow:0 0 15px cyan; }
+    header h1 { margin:0; font-size:28px; color:cyan; text-shadow:0 0 10px #00ffff,0 0 20px #00ffff; }
+    .contact-section { padding:50px 0; text-align:center; }
+    .contact-section h2 { font-size:32px; margin-bottom:20px; color:#ff00ff; text-shadow:0 0 10px #ff00ff,0 0 20px #ff00ff; }
+    .contact-section p { margin-bottom:40px; font-size:18px; color:#ccc; }
+    .contact-form { max-width:600px; margin:auto; background:#111; padding:30px; border-radius:12px; box-shadow:0 0 15px cyan; }
+    .contact-form input,.contact-form textarea { width:100%; padding:12px; margin:10px 0; border:none; outline:none; border-radius:8px; background:#000; color:#00ffea; font-size:16px; box-shadow:inset 0 0 10px #00ffff; }
+    .contact-form button { width:100%; padding:12px; margin-top:10px; border:none; border-radius:8px;
+      background:linear-gradient(90deg,#00ffff,#ff00ff); color:black; font-size:18px; font-weight:bold; cursor:pointer; transition:.3s;
+      text-transform:uppercase; box-shadow:0 0 15px #00ffff; }
+    .contact-form button:hover { background:linear-gradient(90deg,#ff00ff,#00ffff); box-shadow:0 0 25px #ff00ff; }
+    .social-links { margin-top:40px; }
+    .social-links a { margin:0 15px; color:cyan; font-size:20px; text-decoration:none; transition:.3s; text-shadow:0 0 10px cyan; }
+    .social-links a:hover { color:#ff00ff; text-shadow:0 0 15px #ff00ff; }
+    footer { text-align:center; padding:15px; background:black; border-top:2px solid cyan; color:cyan; font-size:14px; }
+
+    .msg { display:none; margin-top:12px; font-size:16px; }
+    .msg.ok { color:#00ff66; }
+    .msg.err { color:#ff3333; }
+  </style>
+</head>
+<body>
+
+  <header><h1>CONTACT HACKER ACADEMY</h1></header>
+
+  <section class="contact-section" data-aos="fade-up">
+    <div class="container">
+      <h2>Get in Touch</h2>
+      <p>Got queries, collaboration ideas, or security issues? Reach out to us securely 👨‍💻</p>
+
+      <form class="contact-form" id="contactForm" data-aos="zoom-in">
+        <input type="text"   name="name"    placeholder="Your Name"    required>
+        <input type="email"  name="email"   placeholder="Your Email"   required>
+        <textarea rows="5"   name="message" placeholder="Your Message" required></textarea>
+        <button type="submit" id="sendBtn">Send Message</button>
+        <div id="ok"  class="msg ok">✅ Your message has been sent successfully!</div>
+        <div id="err" class="msg err">❌ Something went wrong. Please try again.</div>
+      </form>
+
+      <div class="social-links" data-aos="fade-up" data-aos-delay="300">
+        <a href="https://github.com/PRIYANSHU774926">💻 GitHub</a>
+        <a href="https://www.instagram.com/black_hat_hackers_ironman/">📱 Instagram</a>
+        <a href="mailto:hackersacademybyps@outlook.com">📧 Email</a>
+      </div>
+    </div>
+  </section>
+
+  <footer><p>&copy; 2026 HACKER ACADEMY by (PS) | Secure Contact</p></footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+
+    const scriptURL = "https://script.google.com/macros/s/AKfycbx7z83hy92awVutWrcdkxBDWUyxyFdw0f-PWxzu79kiBhs0_ClF3nfmJnto9pDF3XhWLQ/exec";
+    const form = document.getElementById("contactForm");
+    const btn  = document.getElementById("sendBtn");
+    const okEl = document.getElementById("ok");
+    const errEl= document.getElementById("err");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      okEl.style.display = "none";
+      errEl.style.display = "none";
+      btn.disabled = true; btn.textContent = "Sending...";
+
+      try {
+        await fetch(scriptURL, { method: "POST", mode: "no-cors", body: new FormData(form) });
+        okEl.style.display = "block";
+        form.reset();
+      } catch (err) {
+        console.error(err);
+        errEl.style.display = "block";
+      } finally {
+        btn.disabled = false; btn.textContent = "Send Message";
+      }
+    });
+  </script>
+</body>
+</html>

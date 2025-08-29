@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us | Hacker Academy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+  <style>
+    * {margin: 0; padding: 0; box-sizing: border-box;}
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: #000;
+      color: #00ffff;
+      overflow-x: hidden;
+    }
+    .navbar {
+      background: #000;
+      padding: 20px 0;
+      border-bottom: 2px solid #00ffcc;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .navbar .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 24px;
+      color: #00ffcc;
+    }
+    .logo span {
+      color: #fff;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+    }
+    .nav-links li {
+      margin-left: 20px;
+    }
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+    .nav-links a:hover {
+      color: #00ffcc;
+    }
+    .user-panel {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 5px 12px;
+      background: #000;
+      border: 2px solid cyan;
+      border-radius: 12px;
+      font-size: 13px;
+      box-shadow: 0 0 8px cyan;
+    }
+    .user-panel span {
+      color: #00ffff;
+      font-weight: bold;
+    }
+    .logout-btn {
+      background: red;
+      color: white;
+      padding: 2px 8px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 12px;
+      box-shadow: 0 0 8px red;
+    }
+
+    .section {
+      padding: 60px 20px;
+      text-align: center;
+      max-width: 1000px;
+      margin: auto;
+    }
+    h1, h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #00ffff;
+      animation: glow 2s infinite alternate;
+    }
+    @keyframes glow {
+      0% { text-shadow: 0 0 10px #00ffff; }
+      100% { text-shadow: 0 0 20px #00ffff, 0 0 30px #00ffff; }
+    }
+    .typing {
+      font-size: 1.4rem;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid #00ffff;
+      width: 100%;
+      max-width: 500px;
+      margin: 20px auto;
+      animation: typing 4s steps(40, end), blink 0.8s step-end infinite;
+    }
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    @keyframes blink {
+      from, to { border-color: transparent }
+      50% { border-color: #00ffff; }
+    }
+
+    .section p {
+      line-height: 1.8;
+      color: #ccc;
+      font-size: 1rem;
+      margin-bottom: 25px;
+    }
+
+    .highlight {
+      color: #ff00ff;
+      text-shadow: 0 0 10px #ff00ff;
+    }
+
+    .stat-container {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin: 50px 0;
+      flex-wrap: wrap;
+    }
+    .stat-box {
+      background: #111;
+      padding: 25px 30px;
+      border: 2px solid #00ffff;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #00ffff40;
+      min-width: 200px;
+    }
+    .stat-box h2 {
+      font-size: 2rem;
+      margin: 0;
+    }
+    .stat-box p {
+      margin-top: 8px;
+      font-size: 1rem;
+      color: #ccc;
+    }
+
+    .instructors {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 60px;
+    }
+    .instructor-card {
+      width: 280px;
+      background: #0d0d0d;
+      border: 2px solid #00ffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px cyan;
+      transition: transform 0.3s;
+    }
+    .instructor-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px cyan;
+    }
+    .instructor-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border: none;
+      box-shadow: 0 0 15px #00ffff80;
+    }
+    .instructor-card h3 {
+      color: #00ffff;
+      margin-top: 10px;
+    }
+    .instructor-card p {
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    .footer {
+      margin-top: 100px;
+      background: #000;
+      text-align: center;
+      padding: 20px 10px;
+      border-top: 2px solid #00ffff50;
+      font-size: 0.9rem;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="container">
+      <h1 class="logo">HACKER ACADEMY <span>BY (PS)</span></h1>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="course.html">Courses</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li>
+            <div class="user-panel" id="userPanel" style="display: none;">
+              <span id="userIdDisplay">ID</span>
+              <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Section -->
+  <section class="section">
+    <h1>Welcome to Hacker Academy</h1>
+    <div class="typing">Unlock the Cyber World</div>
+
+    <p>Welcome to <strong>HACKER ACADEMY BY PS</strong> – Your Gateway to Cyber Power.</p>
+    <p>With over <strong>10,000+</strong> enrolled students, <strong>15 active courses</strong>, and <strong>500+</strong> courses in the pipeline, we are one of India's fastest-growing platforms for cybersecurity training.</p>
+    <p>Founded to educate and empower, we deliver practical, in-depth training in ethical hacking, penetration testing, cyber forensics, and more. For students, techies, or pros – we're here to sharpen your cyber edge.</p>
+  </section>
+
+  <!-- Stats -->
+  <section class="stat-container">
+    <div class="stat-box">
+      <h2 id="students">0</h2>
+      <p>Students Enrolled</p>
+    </div>
+    <div class="stat-box">
+      <h2 id="active">0</h2>
+      <p>Active Courses</p>
+    </div>
+    <div class="stat-box">
+      <h2 id="upcoming">0</h2>
+      <p>Upcoming Courses</p>
+    </div>
+  </section>
+
+ <!-- Replace this entire <section class="section"> ... </section> content block in your current file with this -->
+
+<section class="section">
+  <h1>About Us</h1>
+  <div class="typing">Welcome to HACKER ACADEMY BY PS – Your Gateway to Cyber Power.</div>
+  <p>With over <strong>10,000+</strong> enrolled students, <strong>15 active courses</strong>, and <strong>500+</strong> specialized courses being prepared for release, Hacker Academy by PS is one of India’s fastest-growing and most trusted platforms for learning Cybersecurity and IT skills.</p>
+  <p>Founded with the aim to educate and empower, our academy delivers in-depth, industry-relevant, and practical training in the field of ethical hacking, cyber defense, digital forensics, penetration testing, and much more. Whether you're a student, a tech enthusiast, or a working professional — we are here to sharpen your skills and shape your career.</p>
+</section>
+
+<section class="section">
+  <h2>What We Offer</h2>
+  <p>At Hacker Academy by PS, we offer comprehensive training in all major domains of Cybersecurity and IT. From beginner to expert level, our curriculum is crafted to meet the real-world needs of today's digital environment.</p>
+  <p>Here are our currently listed top courses:</p>
+  <p>
+    OSCP – Offensive Security Certified Professional<br>
+    OSWA – Offensive Security Web Assessor<br>
+    OSWE – Offensive Security Web Expert<br>
+    OSEP – Offensive Security Experienced Penetration Tester<br>
+    CPT – Certified Penetration Tester<br>
+    GSEC – GIAC Security Essentials Certification<br>
+    RTOC – Real Time Offensive Cybersecurity<br>
+    CHFI – Computer Hacking Forensic Investigator<br>
+    TIA – Threat Intelligence Analyst<br>
+    JPT – Junior Penetration Tester<br>
+    THMP – Threat Hunting & Malware Protection<br>
+    CEH – Certified Ethical Hacker<br>
+    CE – Cyber Expert<br>
+    GCPC – Google Cloud Platform Cybersecurity<br>
+    <span class="highlight">CBHH – Certified Black Hat Hacker</span> (our most advanced and elite course)
+  </p>
+  <p>Each course is backed by practical labs, tools, real-world case studies, and challenges to give you hands-on experience — not just theory.</p>
+</section>
+
+<section class="section">
+  <h2>What Makes Us Unique?</h2>
+  <p>✔️ 15 active, live courses<br>
+     ✔️ 500+ upcoming courses ready to launch soon<br>
+     ✔️ Learn from real-world hackers and cyber experts<br>
+     ✔️ 24/7 doubt support and mentoring<br>
+     ✔️ Certifications provided after course completion<br>
+     ✔️ Beginner to Advanced level structured learning<br>
+     ✔️ Affordable fees with lifetime access
+  </p>
+  <p>Our goal is not just to help you learn, but to prepare you for a successful career in cybersecurity and IT fields.</p>
+</section>
+
+<section class="section">
+  <h2>Upcoming Courses – Stay Tuned!</h2>
+  <p>We’re currently working on over 500+ courses, which cover a wide range of topics including:</p>
+  <p>
+    Mobile Security<br>
+    Cloud Penetration Testing<br>
+    Red Team Operations<br>
+    OSINT (Open Source Intelligence)<br>
+    Python for Cybersecurity<br>
+    SIEM Tools<br>
+    AI in Cyber Defense<br>
+    And many more...
+  </p>
+  <p>These courses will be listed very soon, so stay connected and get ready to learn the most in-demand skills of the digital age.</p>
+</section>
+
+<section class="section">
+  <h2>Our Mission & Vision</h2>
+  <p>At HACKER ACADEMY BY PS, our mission is simple:</p>
+  <blockquote>“To empower every learner with cybersecurity knowledge that protects the future of the digital world.”</blockquote>
+  <p>We believe that knowledge is the best weapon — and in the hands of the right people, it can defend nations, protect companies, and secure personal lives.</p>
+  <p>Our vision is to become India’s No. 1 Cyber Education Hub, building a strong army of ethical hackers, cybersecurity analysts, forensic investigators, and IT specialists who make the internet a safer place.</p>
+</section>
+
+<section class="section">
+  <h2>Join Us</h2>
+  <p>Join thousands of others who have already begun their journey with us. Learn from the best, become the best.</p>
+  <p>Whether you want to hack to secure, detect to defend, or analyze to prevent, HACKER ACADEMY BY PS is your ultimate learning partner.</p>
+  <p>🚀 Start your journey today. Be the next Cyber Warrior!</p>
+</section>
+
+  <!-- Instructors -->
+  <section class="section">
+    <h2>Instructors</h2>
+    <div class="instructors">
+      <div class="instructor-card">
+        <img src="240_F_569862742_UtBe47tYoEoB6IbjhURx6y5vvFsIaDOH.jpg" alt="ER.PRIYANSHU SHARMA">
+        <h3>ER.PRIYANSHU SHARMA</h3>
+        <p>Founder & All Courses Expert</p>
+      </div>
+      <div class="instructor-card">
+        <img src="240_F_757666211_IGrIsDxgVb3YLyTaXbIfejFUNexnMdOC.jpg" alt="Physco Hacker">
+        <h3><b>PHYSCO HACKER</b></h3>
+        <p>Programming & Social Engineering Expert</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    &copy; 2025 Hacker Academy by PS. All rights reserved.
+  </footer>
+
+  <script>
+    function logout() {
+      localStorage.removeItem("hackerUser");
+      location.href = "login.html";
+    }
+    const loggedInUser = localStorage.getItem("hackerUser");
+    if (!loggedInUser) {
+      location.href = "login.html";
+    } else {
+      document.getElementById("userPanel").style.display = "flex";
+      document.getElementById("userIdDisplay").textContent = loggedInUser;
+    }
+
+    function animateValue(id, start, end, duration) {
+      const obj = document.getElementById(id);
+      let startTimestamp = null;
+      const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        obj.textContent = Math.floor(progress * (end - start) + start) + "+";
+        if (progress < 1) window.requestAnimationFrame(step);
+      };
+      window.requestAnimationFrame(step);
+    }
+    window.onload = function () {
+      animateValue("students", 0, 10000, 3000);
+      animateValue("active", 0, 15, 2000);
+      animateValue("upcoming", 0, 500, 3000);
+    };
+  </script>
+
+</body>
+</html>

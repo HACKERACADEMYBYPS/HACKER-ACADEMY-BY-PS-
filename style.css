@@ -1,0 +1,313 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Orbitron', sans-serif;
+  background: #0a0a0a;
+  color: #00ffcc;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Container */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Navbar */
+.navbar {
+  background: #000;
+  padding: 20px 0;
+  border-bottom: 2px solid #00ffcc;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 24px;
+  color: #00ffcc;
+  display: inline-block;
+}
+
+.logo span {
+  color: #fff;
+}
+
+.navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+.nav-links li {
+  margin-left: 20px;
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s;
+  font-size: 16px;
+}
+
+.nav-links a:hover {
+  color: #00ffcc;
+}
+
+.user-panel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 12px;
+  background: #000;
+  border: 2px solid cyan;
+  border-radius: 12px;
+  font-size: 13px;
+  box-shadow: 0 0 8px cyan;
+}
+
+.user-panel span {
+  color: #00ffff;
+  font-weight: bold;
+}
+
+.logout-btn {
+  background: red;
+  color: white;
+  padding: 2px 8px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+  box-shadow: 0 0 8px red;
+}
+
+/* Hero Section */
+.hero {
+  background: url('https://cdn.pixabay.com/photo/2018/05/08/08/49/hacker-3386193_1280.jpg') no-repeat center center/cover;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  animation: fadeIn 2s ease-in-out;
+  padding: 0 20px;
+}
+
+.hero h2 {
+  font-size: 3rem;
+  color: #00ffcc;
+  animation: slideIn 1.2s ease;
+}
+
+.hero p {
+  margin-top: 10px;
+  font-size: 1.2rem;
+  color: #eee;
+  animation: slideIn 1.5s ease;
+}
+
+.btn {
+  margin-top: 20px;
+  padding: 10px 25px;
+  background: #00ffcc;
+  color: #000;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: transform 0.3s ease;
+  animation: zoomIn 2s ease;
+}
+
+.btn:hover {
+  transform: scale(1.1);
+}
+
+/* About Section */
+.about-section {
+  padding: 60px 20px;
+  background: #111;
+  text-align: center;
+}
+
+.about-section h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.about-section p {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1rem;
+  color: #ccc;
+}
+
+/* Courses Section */
+.courses-section {
+  padding: 60px 20px;
+  background: #1a1a1a;
+  text-align: center;
+}
+
+.courses-section h2 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+.course-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.course-card {
+  background: #000;
+  padding: 20px;
+  border: 2px solid #00ffcc;
+  border-radius: 10px;
+  width: 250px;
+  text-align: center;
+  font-weight: bold;
+  color: #00ffcc;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.course-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #00ffcc;
+}
+
+/* Footer */
+.footer {
+  background: #000;
+  padding: 20px 0;
+  text-align: center;
+  color: #666;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Typing Effect */
+.typewriter {
+  font-size: 3rem;
+  color: #00ffcc;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  font-weight: bold;
+}
+
+.cursor {
+  display: inline-block;
+  background: #00ffcc;
+  width: 2px;
+  animation: blink 0.8s infinite;
+  margin-left: 5px;
+  height: 1.2em;
+}
+
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
+}
+
+/* Contact Section */
+.contact-section {
+  padding: 60px 20px;
+  background: #111;
+  color: #00ffcc;
+  text-align: center;
+}
+
+.contact-section h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+#contact-form {
+  max-width: 600px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#contact-form input,
+#contact-form textarea {
+  padding: 10px;
+  border: 2px solid #00ffcc;
+  background: #000;
+  color: #00ffcc;
+  border-radius: 5px;
+  font-size: 1rem;
+  resize: none;
+}
+
+#contact-form input:focus,
+#contact-form textarea:focus {
+  outline: none;
+  box-shadow: 0 0 10px #00ffcc;
+}
+
+#contact-form button {
+  padding: 10px;
+  background: #00ffcc;
+  color: #000;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+#contact-form button:hover {
+  transform: scale(1.05);
+  background: #00ffe6;
+}
+
+#form-status {
+  margin-top: 15px;
+  font-size: 0.9rem;
+  color: #00ffcc;
+}

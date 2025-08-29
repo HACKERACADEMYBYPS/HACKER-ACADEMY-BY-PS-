@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HACKER ACADEMY by (PS)</title>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css"/>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet"/>
+
+  <!-- AOS Animation CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet"/>
+
+  <style>
+    .user-panel {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 5px 12px;
+      background: #000;
+      border: 2px solid cyan;
+      border-radius: 12px;
+      font-size: 13px;
+      box-shadow: 0 0 8px cyan;
+    }
+    .user-panel span {
+      color: #00ffff;
+      font-weight: bold;
+    }
+    .logout-btn {
+      background: red;
+      color: white;
+      padding: 2px 8px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 12px;
+      box-shadow: 0 0 8px red;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header class="navbar" data-aos="fade-down">
+    <div class="container">
+      <h1 class="logo">HACKER ACADEMY <span>BY (PS)</span></h1>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="course.html">Courses</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li>
+            <div class="user-panel" id="userPanel" style="display: none;">
+              <span id="userIdDisplay">ID</span>
+              <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" data-aos="zoom-in">
+    <div class="container">
+      <h2 class="typewriter"><span id="type-text"></span><span class="cursor">|</span></h2>
+      <p data-aos="fade-up">Become an ethical hacker and cyber security expert.</p>
+      <br>
+      <a href="course.html" class="btn pulse" data-aos="fade-up" data-aos-delay="200">Get Started</a>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about-section" data-aos="fade-right">
+    <div class="container">
+      <h2>About Hacker Academy</h2>
+      <p>We train passionate individuals to become cyber defenders through hands-on learning and real-world tools.</p>
+    </div>
+  </section>
+
+  <!-- Courses Section -->
+  <section id="courses" class="courses-section" data-aos="fade-up">
+    <div class="container">
+      <h2>Popular Courses</h2>
+      <div class="course-grid">
+  <div class="course-card" data-aos="flip-left">
+    <a href="tia.html" style="color: inherit; text-decoration: none;">Threat Intelligence Analyst cert</a>
+  </div>
+  <div class="course-card" data-aos="flip-left" data-aos-delay="200">
+    <a href="ceh.html" style="color: inherit; text-decoration: none;">Certified Ethical Hacker</a>
+  </div>
+  <div class="course-card" data-aos="flip-left" data-aos-delay="400">
+    <a href="cbhh.html" style="color: inherit; text-decoration: none;">Certified Black Hat Hacker</a>
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <footer class="footer" data-aos="fade-up">
+    <div class="container">
+      <p>&copy; 2026 HACKER ACADEMY by (PS) | All Rights Reserved</p>
+    </div>
+  </footer>
+
+  <!-- AOS JS -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+  </script>
+
+  <!-- Session Check + Logout -->
+  <script>
+    function logout() {
+      localStorage.removeItem("hackerUser");
+      location.href = "login.html";
+    }
+
+    const loggedInUser = localStorage.getItem("hackerUser");
+    if (!loggedInUser) {
+      location.href = "login.html";
+    } else {
+      document.getElementById("userPanel").style.display = "flex";
+      document.getElementById("userIdDisplay").textContent = loggedInUser;
+
+      // Check tampering every second
+      setInterval(() => {
+        if (!localStorage.getItem("hackerUser")) {
+          logout();
+        }
+      }, 1000);
+    }
+  </script>
+
+  <!-- Custom JS -->
+  <script src="script.js"></script>
+</body>
+</html>

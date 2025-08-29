@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>HACKER ACADEMY BY PS — Student Registration</title>
+<style>
+  :root{
+    --bg:#05060f; --grid:#0b0f24;
+    --neon:#00ffd5; --neon2:#7cfffd;
+    --danger:#ff5b7c; --text:#e7f7ff; --muted:#9ec7d1;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;color:var(--text);background:#05060f;font-family:Segoe UI,Roboto,Inter,Arial}
+  #matrix{position:fixed;inset:0;z-index:-2;background:#02040a}
+  .overlay{position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background:linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px) 0 0/100% 22px,
+               linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px) 0 0/22px 100%;}
+  .wrap{width:min(980px,92vw);margin:40px auto}
+  .card{background:rgba(255,255,255,.04);border:1px solid rgba(124,255,253,.18);
+        border-radius:22px;padding:28px;box-shadow:0 0 0 1px rgba(0,255,213,.18) inset,0 30px 80px rgba(0,0,0,.55)}
+  .title{font-size:clamp(24px,4vw,40px);text-shadow:0 0 18px var(--neon)}
+  form{display:grid;gap:14px}
+  .grid{display:grid;gap:14px;grid-template-columns:1fr 1fr}
+  @media(max-width:780px){.grid{grid-template-columns:1fr}}
+  label{font-size:.92rem;margin-bottom:6px;display:block}
+  .field{background:#0b1433;border:1px solid rgba(124,255,253,.18);color:var(--text);
+         border-radius:14px;padding:12px 14px;width:100%}
+  textarea.field{min-height:90px;resize:vertical}
+  .req:after{content:" *";color:var(--neon2)}
+  .btn{cursor:pointer;border:0;padding:14px;border-radius:14px;font-weight:800;
+       background:linear-gradient(90deg,var(--neon),var(--neon2));color:#012b2a}
+  .status{min-height:22px;margin-top:6px;font-size:.95rem}
+  .ok{color:#79ffb0}.bad{color:var(--danger)}
+</style>
+</head>
+<body>
+<canvas id="matrix"></canvas>
+<div class="overlay"></div>
+
+<div class="wrap">
+  <div class="card">
+    <h1 class="title">HACKER ACADEMY BY PS <br> STUDENT REGISTRATION </h1>
+    <form id="regForm" autocomplete="on" novalidate>
+      
+      <div class="grid">
+        <div>
+  <label class="req">GCPC</label>
+  <input class="field" type="text" name="CourseName" value="GCPC" readonly />
+</div>
+
+        <div>
+          <label class="req">Student Name</label>
+          <input class="field" type="text" name="StudentName" required />
+        </div>
+      </div>
+
+      <div>
+        <label class="req">Government ID</label>
+        <input class="field" type="text" name="GovernmentID" placeholder="e.g. Aadhaar / Passport" required />
+      </div>
+
+      <div class="grid">
+        <div>
+          <label class="req">10th Roll Number</label>
+          <input class="field" type="text" name="Roll10" required />
+        </div>
+        <div>
+          <label class="req">12th Roll Number</label>
+          <input class="field" type="text" name="Roll12" required />
+        </div>
+      </div>
+
+      <div>
+        <label class="req">Full Address</label>
+        <textarea class="field" name="Address" required></textarea>
+      </div>
+
+      <div class="grid">
+        <div>
+          <label class="req">PIN Code</label>
+          <input class="field" type="text" name="PinCode" required />
+        </div>
+        <div>
+          <label class="req">Country</label>
+          <input class="field" type="text" name="Country" required />
+        </div>
+      </div>
+
+      <div>
+        <label class="req">HABPS ID Number</label>
+        <input class="field" type="text" name="HabpsID" required />
+      </div>
+
+      <button class="btn" type="submit" id="submitBtn">SUBMIT REGISTRATION</button>
+      <div id="status" class="status"></div>
+    </form>
+  </div>
+</div>
+
+<script>
+  // === Matrix rain ===
+   (function matrixRain(){
+    const c=document.getElementById('matrix'),ctx=c.getContext('2d');
+    function size(){c.width=innerWidth;c.height=innerHeight;}
+    size();addEventListener('resize',size);
+    const letters='01ABCDEF#$%&@';const fontSize=16;
+    let cols=Math.floor(c.width/fontSize);let drops=Array(cols).fill(1);
+    function draw(){
+      ctx.fillStyle='rgba(0,0,0,0.08)';ctx.fillRect(0,0,c.width,c.height);
+      ctx.fillStyle='#00ffd5';ctx.font=fontSize+'px monospace';
+      for(let i=0;i<drops.length;i++){
+        const text=letters[Math.floor(Math.random()*letters.length)];
+        ctx.fillText(text,i*fontSize,drops[i]*fontSize);
+        if(drops[i]*fontSize>c.height&&Math.random()>0.975){drops[i]=0;}
+        drops[i]++; }
+      requestAnimationFrame(draw);}
+    draw();
+  })();
+
+  // === Form handling ===
+  const form=document.getElementById('regForm');
+  const statusEl=document.getElementById('status');
+  const submitBtn=document.getElementById('submitBtn');
+
+  function setStatus(msg,ok){statusEl.textContent=msg;statusEl.className='status '+(ok?'ok':'bad');}
+
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(!form.checkValidity()){form.reportValidity();setStatus('⚠ Please fill all fields.',false);return;}
+    submitBtn.disabled=true;submitBtn.textContent='SENDING…';
+
+    // Collect form data as URL-encoded parameters
+    const formData = new URLSearchParams();
+    for (const pair of new FormData(form)) {
+      formData.append(pair[0], pair[1]);
+    }
+
+    // Update this with your Google Apps Script URL
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzByLyWvXd5aSs5nj9YxDi9Kpk7xgVEKnjAbaA21CwJDl6N6XFXw9DIJ_MQGq1l0eDn/exec';
+    
+    fetch(scriptURL, {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      if(data.result === "success" || data.status === "success"){
+        setStatus("✅ Registration submitted successfully!", true);
+        form.reset();
+      } else {
+        setStatus("❌ Failed to save data: " + (data.message || "Unknown error"), false);
+      }
+    })
+    .catch(err => {
+      console.error('Error:', err);
+      setStatus("❌ Error submitting form. Please try again.", false);
+    })
+    .finally(() => {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'SUBMIT REGISTRATION';
+    });
+  });
+</script>
+
+</body>
+</html>

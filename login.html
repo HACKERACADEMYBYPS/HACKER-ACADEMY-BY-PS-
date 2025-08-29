@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login | HACKER ACADEMY</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: 'Orbitron', sans-serif;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: black;
+      overflow: hidden;
+      color: #0ff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    /* MATRIX BACKGROUND */
+    .matrix-bg {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0; left: 0;
+      z-index: -1;
+      background: black;
+      overflow: hidden;
+    }
+
+    .matrix-bg canvas {
+      display: block;
+    }
+
+    .login-box {
+      background: rgba(10, 10, 10, 0.95);
+      border: 2px solid #00ffe1;
+      box-shadow: 0 0 30px #00ffe1, 0 0 50px #0ff;
+      padding: 30px;
+      width: 320px;
+      border-radius: 10px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .login-box h2 {
+      text-align: center;
+      margin-bottom: 10px;
+      color: #00ffff;
+      text-shadow: 0 0 15px #00ffff;
+      animation: glitch 1s infinite;
+    }
+
+    @keyframes glitch {
+      0% { text-shadow: 1px 1px #f0f, -1px -1px #0ff; }
+      20% { text-shadow: 2px -1px #0ff, -2px 1px #f0f; }
+      40% { text-shadow: -1px 2px #0ff, 1px -2px #f0f; }
+      60% { text-shadow: 2px 2px #f0f, -2px -2px #0ff; }
+      80% { text-shadow: -2px 1px #f0f, 2px -1px #0ff; }
+      100% { text-shadow: 1px -1px #0ff, -1px 1px #f0f; }
+    }
+
+    .subtext {
+      text-align: center;
+      color: #ccc;
+      font-size: 12px;
+      margin-bottom: 15px;
+      animation: typing 5s steps(30) 1;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid #0ff;
+      width: 0;
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      background: #000;
+      color: #0ff;
+      border: 1px solid #00ffe1;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+
+    .login-box input:focus {
+      outline: none;
+      box-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+    }
+
+    .login-box button {
+      width: 100%;
+      padding: 10px;
+      background: #00ffe1;
+      border: none;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .login-box button:hover {
+      background: #00cccc;
+      box-shadow: 0 0 20px #00ffe1;
+    }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+      text-align: center;
+      animation: shake 0.3s ease;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+
+    .note {
+      font-size: 12px;
+      color: #aaa;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .note a {
+      color: #fff;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- MATRIX CANVAS BACKGROUND -->
+  <div class="matrix-bg">
+    <canvas id="matrixCanvas"></canvas>
+  </div>
+
+  <div class="login-box">
+    <h2>HACKER ACADEMY BY PS</h2>
+    <div class="subtext">🔐 Only authorized users can log in</div>
+    <input type="text" id="userid" placeholder="User ID (e.g. root#1099)" />
+    <input type="password" id="password" placeholder="Password" />
+    <button onclick="login()">Login</button>
+    <p class="error" id="errorMsg" style="display:none;">Invalid ID or Password</p>
+    <div class="note">
+      Don’t have an ID? Contact <a href="mailto:rootparrotblack@gmail.com">rootparrotblack@gmail.com</a>
+    </div>
+  </div>
+
+  <script>
+    function login() {
+      const user = document.getElementById("userid").value.trim();
+      const pass = document.getElementById("password").value;
+
+      const validUsers = {
+        "Hacker#7749": "Dark@1234",
+        "Sunita#7749": "sunita@123",
+        "Preety#7749": "hacker@77",
+        "Kasagi#7749": "secure@cyberworld",
+        "ironmanhacker": "#Ps*(77)",
+        "User#7749": "user@1234"
+      };
+
+      if (validUsers[user] === pass) {
+        localStorage.setItem("hackerUser", user);
+        window.location.href = "index.html";
+      } else {
+        const err = document.getElementById("errorMsg");
+        err.style.display = "block";
+        err.textContent = "❌ Invalid ID or Password";
+        new Audio('https://www.soundjay.com/buttons/sounds/beep-10.mp3').play();
+      }
+    }
+
+    // MATRIX BACKGROUND SCRIPT
+    const canvas = document.getElementById('matrixCanvas');
+    const ctx = canvas.getContext('2d');
+
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+
+    const letters = '01';
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+
+    function drawMatrix() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = '#0f0';
+      ctx.font = fontSize + 'px monospace';
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters.charAt(Math.floor(Math.random() * letters.length));
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height || Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+
+        drops[i]++;
+      }
+    }
+
+    setInterval(drawMatrix, 35);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+
+</body>
+</html>
